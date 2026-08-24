@@ -15,22 +15,25 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 设置 Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
+      - name: 检查 Node 环境
+        run: |
+          node --version
+          npm --version
 
       - name: 安装依赖
         run: npm ci
 
       - name: 安装 Playwright 浏览器
-        run: npx playwright install --with-deps chromium
+        env:
+          PLAYWRIGHT_DOWNLOAD_HOST: https://cdn.npmmirror.com/binaries/playwright
+          PLAYWRIGHT_BROWSERS_PATH: D:\playwright-browsers
+        run: npx playwright install chromium
 
-      - name: 运行测试
+      - name: 运行 Playwright 测试
         env:
           CRM_USER: ${{ secrets.CRM_USER }}
           CRM_PASS: ${{ secrets.CRM_PASS }}
+          PLAYWRIGHT_BROWSERS_PATH: D:\playwright-browsers
         run: npx playwright test
 
       - name: 上传测试报告
