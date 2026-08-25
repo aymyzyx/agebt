@@ -31,7 +31,7 @@ jobs:
         env:
           PLAYWRIGHT_DOWNLOAD_HOST: https://cdn.npmmirror.com/binaries/playwright
           PLAYWRIGHT_BROWSERS_PATH: D:\playwright-browsers
-        run: npx playwright install chromium --verbose
+        run: npx playwright install chromium
 
       - name: 运行 Playwright 测试
         env:
