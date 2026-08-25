@@ -19,15 +19,19 @@ jobs:
         run: |
           node --version
           npm --version
+          npm config get registry
 
-      - name: 安装依赖
-        run: npm ci
+      - name: 设置国内 npm 镜像并安装依赖
+        run: |
+          npm config set registry https://registry.npmmirror.com
+          npm config set strict-ssl false
+          npm ci --verbose
 
       - name: 安装 Playwright 浏览器
         env:
           PLAYWRIGHT_DOWNLOAD_HOST: https://cdn.npmmirror.com/binaries/playwright
           PLAYWRIGHT_BROWSERS_PATH: D:\playwright-browsers
-        run: npx playwright install chromium
+        run: npx playwright install chromium --verbose
 
       - name: 运行 Playwright 测试
         env:
