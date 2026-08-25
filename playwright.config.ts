@@ -11,7 +11,7 @@ export default defineConfig({
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
   ],
   use: {
-    baseURL: 'https://crmtest.zhongbaojf.com',
+    baseURL: 'https://ys.mihoyo.com',
     // 本地有显示器 → false（弹出真实浏览器看界面）；CI 环境(无显示器)自动 true
     headless: !!process.env.CI,
     viewport: { width: 1920, height: 1080 },
